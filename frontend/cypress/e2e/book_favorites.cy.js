@@ -47,8 +47,11 @@ describe('Book Favorites App', () => {
     cy.get('a#favorites-link').click();
     cy.get('h2').contains('My Favorite Books').should('exist');
     cy.window().then(win => cy.stub(win, 'confirm').returns(true));
-    cy.get('button').contains('Remove').first().click();
-    cy.get('button').contains('Remove').should('not.exist');
+    cy.get('button[aria-label^="Remove"]').then($buttons => {
+      const initialCount = $buttons.length;
+      cy.get('button[aria-label^="Remove"]').first().click();
+      cy.get('button[aria-label^="Remove"]').should('have.length', initialCount - 1);
+    });
   });
 
   it('should logout and protect routes', () => {
