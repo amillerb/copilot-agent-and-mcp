@@ -20,6 +20,7 @@ describe('Book Favorites App', () => {
     cy.get('input[name="password"]').type(user.password);
     cy.get('button#login').click();
     cy.contains(`Hi, ${user.username}`).should('exist');
+    cy.get('#user-role-tag').should('exist');
     cy.contains('Favorites').should('exist');
   });
 

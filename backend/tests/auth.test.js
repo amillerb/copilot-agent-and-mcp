@@ -39,6 +39,15 @@ describe('Auth API', () => {
     const res = await request(app).post('/api/login').send(testUser);
     expect(res.statusCode).toBe(200);
     expect(res.body.token).toBeDefined();
+    expect(res.body.userType).toBeDefined();
+  });
+
+  it('POST /api/register should assign member userType by default', async () => {
+    const newUser = { username: 'brandnewuser', password: 'pass123' };
+    await request(app).post('/api/register').send(newUser);
+    const res = await request(app).post('/api/login').send(newUser);
+    expect(res.statusCode).toBe(200);
+    expect(res.body.userType).toBe('member');
   });
 
   it('POST /api/login should fail with wrong password', async () => {
