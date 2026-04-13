@@ -2,6 +2,22 @@ import { useAppSelector, useAppDispatch } from '../store/hooks';
 import { logout } from '../store/userSlice';
 import { useNavigate } from 'react-router-dom';
 
+// generated-by-copilot: role display configuration mapping userType to visual properties
+const ROLE_CONFIG = {
+  administrator: {
+    label: 'Administrator',
+    background: '#ff9800',
+    color: '#fff',
+    border: '1px solid #e65100',
+  },
+  member: {
+    label: 'Member',
+    background: 'rgba(255,255,255,0.25)',
+    color: '#e0f7f7',
+    border: '1px solid rgba(255,255,255,0.4)',
+  },
+};
+
 const Header = () => {
   const username = useAppSelector(state => state.user.username);
   const userType = useAppSelector(state => state.user.userType);
@@ -69,19 +85,18 @@ const Header = () => {
           </nav>
           <span style={{ color: '#fff', fontWeight: 600, whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
             Hi, {username}
-            {userType && (
+            {userType && ROLE_CONFIG[userType] && (
               <span id="user-role-tag" style={{
                 fontSize: '0.75rem',
                 fontWeight: 700,
                 padding: '0.15rem 0.55rem',
                 borderRadius: '999px',
-                background: userType === 'administrator' ? '#ff9800' : 'rgba(255,255,255,0.25)',
-                color: userType === 'administrator' ? '#fff' : '#e0f7f7',
+                background: ROLE_CONFIG[userType].background,
+                color: ROLE_CONFIG[userType].color,
                 letterSpacing: '0.04em',
-                textTransform: 'capitalize',
-                border: userType === 'administrator' ? '1px solid #e65100' : '1px solid rgba(255,255,255,0.4)',
+                border: ROLE_CONFIG[userType].border,
               }}>
-                {userType === 'administrator' ? 'Administrator' : 'Member'}
+                {ROLE_CONFIG[userType].label}
               </span>
             )}
           </span>
