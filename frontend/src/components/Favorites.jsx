@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { fetchFavorites } from '../store/favoritesSlice';
+import { fetchFavorites, removeFavorite } from '../store/favoritesSlice';
 import { useNavigate } from 'react-router-dom';
 
 const Favorites = () => {
@@ -17,6 +17,13 @@ const Favorites = () => {
     }
     dispatch(fetchFavorites(token));
   }, [dispatch, token, navigate]);
+
+  // generated-by-copilot: handle removing a book from favorites with a confirmation prompt
+  const handleRemove = (book) => {
+    if (window.confirm(`Remove "${book.title}" from your favorites?`)) {
+      dispatch(removeFavorite({ token, bookId: book.id }));
+    }
+  };
 
   if (status === 'loading') return <div>Loading...</div>;
   if (status === 'failed') return <div>Failed to load favorites.</div>;
@@ -43,8 +50,15 @@ const Favorites = () => {
       ) : (
         <ul>
           {favorites.map(book => (
-            <li key={book.id}>
-              <strong>{book.title}</strong> by {book.author}
+            <li key={book.id} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <span><strong>{book.title}</strong> by {book.author}</span>
+              <button
+                onClick={() => handleRemove(book)}
+                style={{ marginLeft: 'auto', color: '#c0392b', cursor: 'pointer' }}
+                aria-label={`Remove ${book.title} from favorites`}
+              >
+                Remove
+              </button>
             </li>
           ))}
         </ul>
