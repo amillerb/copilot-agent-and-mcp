@@ -12,14 +12,16 @@ const StarRating = ({ bookId, rating, token }) => {
     dispatch(rateBook({ token, bookId, rating: star }));
   };
 
+  // generated-by-copilot: star rating uses radio group semantics for accessibility
   return (
-    <div className={styles.starRating} aria-label="Rate this book">
+    <div className={styles.starRating} role="radiogroup" aria-label="Rate this book">
       {[1, 2, 3, 4, 5].map(star => (
         <button
           key={star}
           className={styles.starBtn}
+          role="radio"
           aria-label={`Rate ${star} star${star > 1 ? 's' : ''}`}
-          aria-pressed={rating === star}
+          aria-checked={rating === star}
           onClick={() => handleRate(star)}
           title={`${star} star${star > 1 ? 's' : ''}`}
         >

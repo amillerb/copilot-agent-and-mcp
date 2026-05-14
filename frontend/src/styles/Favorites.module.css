@@ -52,7 +52,7 @@
 }
 
 .starBtn:focus {
-  outline: none;
+  outline: 2px solid transparent;
 }
 
 .starBtn:focus-visible {
