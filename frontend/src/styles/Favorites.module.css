@@ -1,0 +1,61 @@
+/* generated-by-copilot: styles for the Favorites page with star ratings */
+.favoritesList {
+  list-style: none;
+  padding: 0;
+  margin: 2rem auto;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.favoriteItem {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.bookInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.bookAuthor {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.starRating {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.starBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  line-height: 1;
+  transition: transform 0.1s;
+}
+
+.starBtn:hover {
+  transform: scale(1.2);
+}
+
+.starBtn:focus {
+  outline: none;
+}
+
+.starBtn:focus-visible {
+  outline: 2px solid #f5a623;
+  border-radius: 3px;
+}
